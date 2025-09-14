@@ -1,7 +1,14 @@
+using WebApplication1.Repositorios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var cadenaDeConexion = builder.Configuration.GetConnectionString("PostgreSQLConexion").ToString();
+builder.Services.AddSingleton<string>(cadenaDeConexion);
+
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
 var app = builder.Build();
 
