@@ -1,4 +1,4 @@
-using WebApplication1.Repositorios;
+using WebApplication1.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
