@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Repositorios;
+using WebApplication1.Repositories;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
@@ -17,7 +17,7 @@ namespace WebApplication1.Controllers
         [Route("/usuarios")]
         public IActionResult ListarUsuarios()
         {
-            var usuarios = _repoUsuarios.ObtenerUsuarios();
+            var usuarios = _repoUsuarios.obtenerUsuarios();
             return View(new MostrarUsuariosVM(usuarios));
         }
 
