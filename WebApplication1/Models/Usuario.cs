@@ -2,45 +2,48 @@
 {
     public class Usuario
     {
-        public int Id { get; set; }
-        public string Apellidos { get; set; }
-        public string Nombres { get; set;  }
-        public string Sexo { get; set; }
-        public string Dni {  get; set; }
-        public string Cuil { get; set; }
-        public string Cargo { get; set; }
-        public string Domicilio { get; set; }
-        public string Telefono { get; set; }
-        public string DireccionCorreo { get; set; }
-        public string NombreDeUsuario { get; set; }
-        public string Contrasena { get; set; }
-        public bool Bloqueado { get; set; }
-        public int? PINTemporal { get; set; }
-        public DateTime UltimoAcceso { get; set; }
+        private int idUsuario;
+        private string apellidos;
+        private string nombres;
+        private string direccionCorreo;
+        private string cuil;
+        private Cargo cargo;
+        private string nombreUsuario;
+        private string contrasena;
+        private bool bloqueado;
+        private int? pinTemporal;
+        private DateTime ultimoAcceso;
+        //private List<Permiso> permisos;
 
-        public Usuario(int id, string apellidos, string nombres, string sexo, string dni, string cuil, string cargo, string domicilio, string telefono, string direccionCorreo, string nombreDeUsuario, string contrasena, bool bloqueado, int pINTemporal, DateTime ultimoAcceso)
+        public int IdUsuario { get => idUsuario; }
+        public string Apellidos { get => apellidos; }
+        public string Nombres { get => nombres; }
+        public string DireccionCorreo { get => direccionCorreo; }
+        public string NombreUsuario { get => nombreUsuario; }
+        public string Contrasena { get => contrasena; }
+        public string Cuil { get => cuil; }
+        public Cargo Cargo { get => cargo; set => cargo = value; }
+        public bool Bloqueado { get => bloqueado; }
+        public int? PinTemporal { get => pinTemporal; }
+        public DateTime UltimoAcceso { get => ultimoAcceso; }
+        //public List<Permiso> Permisos { get => permisos; }
+
+        public Usuario(int idUsuario, string apellidos, string nombres, string cuil, Cargo cargo, string direccionCorreo, string nombreUsuario, string contrasena, bool bloqueado, int pinTemporal, DateTime ultimoAcceso)
         {
-            Id = id;
-            Apellidos = apellidos;
-            Nombres = nombres;
-            Sexo = sexo;
-            Dni = dni;
-            Cuil = cuil;
-            Cargo = cargo;
-            Domicilio = domicilio;
-            Telefono = telefono;
-            DireccionCorreo = direccionCorreo;
-            NombreDeUsuario = nombreDeUsuario;
-            Contrasena = contrasena;
-            Bloqueado = bloqueado;
-            PINTemporal = pINTemporal;
-            UltimoAcceso = ultimoAcceso;
+            this.idUsuario = idUsuario;
+            this.apellidos = apellidos;
+            this.nombres = nombres;
+            this.direccionCorreo = direccionCorreo;
+            this.cuil = cuil;
+            this.cargo = cargo;
+            this.nombreUsuario = nombreUsuario;
+            this.contrasena = contrasena;
+            this.bloqueado = bloqueado;
+            this.pinTemporal = pinTemporal;
+            this.ultimoAcceso = ultimoAcceso;
         }
 
         public Usuario() { }
 
-        private string encriptarContrasena(string texto) { return "texto"; }
-        public bool autenticar(string contrasena) { return true; }
-        public void cambiarContrasena(string contrasena) { }
     }
 }
