@@ -22,9 +22,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: UsuarioController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetallesUsuario(int id)
         {
-            return View();
+            var usuario = _repoUsuarios.obtenerUsuarioPorId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
         }
 
         // GET: UsuarioController/Create
