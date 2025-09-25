@@ -10,13 +10,12 @@
     {
         <article style="border:0.1em solid; background-color:floralwhite; padding:0.5em;">
             <h2>
-                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.NombreDeUsuario}")" style="width:5%;"/>
-                @usuario.NombreDeUsuario
+                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.NombreUsuario}")" style="width:5%;"/>
+                @usuario.NombreUsuario
             </h2>
             <p><strong>Nombre Completo:</strong> @usuario.Apellidos, @usuario.Nombres</p>
             <p><strong>CUIL:</strong> @usuario.Cuil</p>
-            <p><strong>Cargo:</strong> @usuario.Cargo</p>
-            <p><strong>Teléfono:</strong> @usuario.Telefono</p>
+            <p><strong>Cargo:</strong> @usuario.Cargo.NombreCargo</p>
             <p><strong>Dirección de correo electrónico personal:</strong> @usuario.DireccionCorreo</p>
             <p><strong>Última vez conectado:</strong> @usuario.UltimoAcceso.ToString("G")</p>
         </article>
