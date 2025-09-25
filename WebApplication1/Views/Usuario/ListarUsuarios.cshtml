@@ -4,20 +4,20 @@
     ViewData["Title"] = "Usuarios";
 }
 
-<h1>Usuarios registrados</h1>
-<section>
+<h1 class="titulo-vista">Usuarios</h1>
+<section id="lista">
     @foreach(var usuario in Model.usuarios)
     {
-        <article style="border:0.1em solid; background-color:floralwhite; padding:0.5em;">
-            <h2>
-                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.NombreUsuario}")" style="width:5%;"/>
-                @usuario.NombreUsuario
-            </h2>
-            <p><strong>Nombre Completo:</strong> @usuario.Apellidos, @usuario.Nombres</p>
-            <p><strong>CUIL:</strong> @usuario.Cuil</p>
-            <p><strong>Cargo:</strong> @usuario.Cargo.NombreCargo</p>
-            <p><strong>Dirección de correo electrónico personal:</strong> @usuario.DireccionCorreo</p>
-            <p><strong>Última vez conectado:</strong> @usuario.UltimoAcceso.ToString("G")</p>
-        </article>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#infoUsuario">
+            <article>
+                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.NombreUsuario}")"/>
+                <h2>
+                    @usuario.NombreUsuario
+                </h2>
+                <p><strong>Nombre Completo</strong>@usuario.Apellidos, @usuario.Nombres</p>
+                <p><strong>CUIL</strong>@usuario.Cuil</p>
+                <p><strong>Última vez conectado</strong>@usuario.UltimoAcceso.ToString("G")</p>
+            </article>
+        </button>
     }
 </section>
