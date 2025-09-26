@@ -6,6 +6,7 @@ namespace WebApplication1.Repositories
     {
         List<Usuario> obtenerUsuarios();
         Usuario obtenerUsuarioPorId(int idUsuario);
+        void editarUsuario(Usuario usuario);
 
     }
 }

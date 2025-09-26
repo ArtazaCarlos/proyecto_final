@@ -11,56 +11,56 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellidos)
+            @Html.DisplayNameFor(model => model.apellidos)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellidos)
+            @Html.DisplayFor(model => model.apellidos)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombres)
+            @Html.DisplayNameFor(model => model.nombres)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombres)
+            @Html.DisplayFor(model => model.nombres)
         </dd>
 
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DireccionCorreo)
+            @Html.DisplayNameFor(model => model.direccionCorreo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DireccionCorreo)
+            @Html.DisplayFor(model => model.direccionCorreo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreUsuario)
+            @Html.DisplayNameFor(model => model.nombreUsuario)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreUsuario)
+            @Html.DisplayFor(model => model.nombreUsuario)
         </dd>
       
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cuil)
+            @Html.DisplayNameFor(model => model.cuil)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cuil)
+            @Html.DisplayFor(model => model.cuil)
         </dd>
 
         <dt class = "col-sm-2">
             Cargo
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cargo.NombreCargo)
+            @Html.DisplayFor(model => model.cargo.NombreCargo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UltimoAcceso)
+            @Html.DisplayNameFor(model => model.ultimoAcceso)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UltimoAcceso)
+            @Html.DisplayFor(model => model.ultimoAcceso)
         </dd>
     </dl>
 </div>
 <div>
     <a href="#" class="btn btn-success">Generar PIN</a>
     <a href="#">Bloquear</a>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdUsuario }) 
+    @Html.ActionLink("EditarUsuario", "EditarUsuario", new { id = Model.idUsuario })
     <a href="#" class="btn btn-danger">Eliminar</a>
     <a asp-action="Index">Back to List</a>
 </div>

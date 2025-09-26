@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
 using WebApplication1.Repositories;
 using WebApplication1.ViewModels;
 
@@ -54,23 +55,38 @@ namespace WebApplication1.Controllers
         }
 
         // GET: UsuarioController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditarUsuario(int id)
         {
-            return View();
+            var usuario = _repoUsuarios.obtenerUsuarioPorId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditarUsuario(int id, Usuario model)
         {
+            if (id != model.idUsuario)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                _repoUsuarios.editarUsuario(model);
+                return RedirectToAction(nameof(DetallesUsuario), new { id = model.idUsuario });
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 

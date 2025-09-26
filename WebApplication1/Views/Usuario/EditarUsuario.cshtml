@@ -1,0 +1,68 @@
+﻿@model WebApplication1.Models.Usuario
+
+@{
+    ViewData["Title"] = "EditarUsuario";
+}
+
+<h1>EditarUsuario</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarUsuario" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="idUsuario" />
+
+            <div class="form-group">
+                <label asp-for="apellidos" class="control-label"></label>
+                <input asp-for="apellidos" class="form-control" />
+                <span asp-validation-for="apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombres" class="control-label"></label>
+                <input asp-for="nombres" class="form-control" />
+                <span asp-validation-for="nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccionCorreo" class="control-label"></label>
+                <input asp-for="direccionCorreo" class="form-control" />
+                <span asp-validation-for="direccionCorreo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombreUsuario" class="control-label"></label>
+                <input asp-for="nombreUsuario" class="form-control" />
+                <span asp-validation-for="nombreUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="cuil" class="control-label"></label>
+                <input asp-for="cuil" class="form-control" />
+                <span asp-validation-for="cuil" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="bloqueado" /> @Html.DisplayNameFor(model => model.bloqueado)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="pinTemporal" class="control-label"></label>
+                <input asp-for="pinTemporal" class="form-control" />
+                <span asp-validation-for="pinTemporal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

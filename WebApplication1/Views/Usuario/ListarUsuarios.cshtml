@@ -11,13 +11,13 @@
     {
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#infoUsuario">
             <article>
-                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.Apellidos}+{usuario.Nombres}")"/>
+                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.apellidos}+{usuario.nombres}")"/>
                 <h2>
-                    @usuario.NombreUsuario
+                    @usuario.nombreUsuario
                 </h2>
-                <p><strong>Nombre Completo</strong>@usuario.Apellidos, @usuario.Nombres</p>
-                <p><strong>CUIL</strong>@usuario.Cuil</p>
-                <p><strong>Última vez conectado</strong>@usuario.UltimoAcceso.ToString("G")</p>
+                <p><strong>Nombre Completo</strong>@usuario.apellidos, @usuario.nombres</p>
+                <p><strong>CUIL</strong>@usuario.cuil</p>
+                <p><strong>Última vez conectado</strong>@usuario.ultimoAcceso.ToString("G")</p>
             </article>
         </button>
     }

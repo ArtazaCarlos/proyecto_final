@@ -98,6 +98,37 @@ namespace WebApplication1.Repositories
         
             return usuario;
         }
+
+        public void editarUsuario(Usuario usuario)
+        {
+            using var conexion = new NpgsqlConnection(_cadenaDeConexion);
+            conexion.Open();
+            const string consultaString = @"UPDATE usuario 
+                                       SET apellidos = @apellidos, 
+                                           nombres = @nombres, 
+                                           cuil = @cuil,
+                                           direccion_correo = @direccionCorreo, 
+                                           nombre_usuario = @nombreUsuario,  
+                                           bloqueado = @bloqueado, 
+                                           pin_temporal = @pinTemporal 
+                                       WHERE id_usuario = @idUsuario;";
+
+            using var comando = new NpgsqlCommand(consultaString, conexion);
+
+            comando.Parameters.AddWithValue("@apellidos", usuario.apellidos);
+            comando.Parameters.AddWithValue("@nombres", usuario.nombres);
+            comando.Parameters.AddWithValue("@cuil", usuario.cuil);
+            comando.Parameters.AddWithValue("@direccionCorreo", usuario.direccionCorreo);
+            comando.Parameters.AddWithValue("@nombreUsuario", usuario.nombreUsuario);
+            comando.Parameters.AddWithValue("@bloqueado", usuario.bloqueado);
+            if (usuario.pinTemporal.HasValue)
+                comando.Parameters.AddWithValue("@pinTemporal", usuario.pinTemporal.Value);
+            else
+                comando.Parameters.AddWithValue("@pinTemporal", DBNull.Value);
+            comando.Parameters.AddWithValue("@idUsuario", usuario.idUsuario);
+            comando.ExecuteNonQuery();
+
+        }
     }
 }
 
