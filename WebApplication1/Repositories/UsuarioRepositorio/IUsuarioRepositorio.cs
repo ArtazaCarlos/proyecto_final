@@ -1,4 +1,5 @@
-﻿using WebApplication1.Models;
+﻿using Data.Entities;
+using WebApplication1.Models;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Repositories
@@ -6,8 +7,8 @@ namespace WebApplication1.Repositories
     public interface IUsuarioRepositorio
     {
         IEnumerable<Usuario> obtenerUsuarios();
-        //Usuario obtenerUsuarioPorId(int idUsuario);
-        //void editarUsuario(Usuario usuario);
-
+        Usuario obtenerUsuarioPorId(int idUsuario);
+        void editarUsuario(UsuarioEntity usuario);
+        void crearUsuario(UsuarioEntity usuario);
     }
 }

@@ -17,13 +17,21 @@ namespace WebApplication1.ViewModels
 
     public class UsuarioCrearVM
     {
-
+        public string Apellidos { get; set; }
+        public string Nombres { get; set; }
+        public string Cuil { get; set; }
+        public string DireccionCorreo { get; set; }
+        public string Contrasena { get; set; }
     }
 
     public class UsuarioEditarVM
     {
-
+        public int idUsuario { get; set; }
+        public string apellidos { get; set; }
+        public string nombres { get; set; }
+        public string cuil { get; set; }
+        public string direccionCorreo { get; set; }
+        public bool bloqueado { get; set; }
     }
-
 
 }

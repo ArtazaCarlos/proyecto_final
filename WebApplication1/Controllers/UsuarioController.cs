@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
 using WebApplication1.ViewModels;
+using Data.Entities;
 
 namespace WebApplication1.Controllers
 {
@@ -53,9 +54,10 @@ namespace WebApplication1.Controllers
             }
             return View(usuario);
         }
+        */
 
         // GET: UsuarioController/Create
-        public ActionResult Create()
+        public ActionResult CrearUsuario()
         {
             return View();
         }
@@ -63,11 +65,29 @@ namespace WebApplication1.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CrearUsuario(UsuarioCrearVM usuarioCrearMV)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(usuarioCrearMV);
+            }
+            if (usuarioCrearMV == null)
+            {
+                return BadRequest();
+            }
+            var usuarioEntity = new UsuarioEntity
+            {
+                Apellidos = usuarioCrearMV.Apellidos,
+                Nombres = usuarioCrearMV.Nombres,
+                Cuil = usuarioCrearMV.Cuil,
+                DireccionCorreo = usuarioCrearMV.DireccionCorreo,
+                Contrasena = usuarioCrearMV.Contrasena
+            };
+            _repoUsuarios.crearUsuario(usuarioEntity);
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListarUsuarios));
             }
             catch
             {
@@ -83,13 +103,25 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            return View(usuario);
+
+            var usuarioMV = new UsuarioEditarVM
+            {
+                idUsuario = usuario.IdUsuario,
+                apellidos = usuario.Apellidos,
+                nombres = usuario.Nombres,
+                cuil = usuario.Cuil,
+                direccionCorreo = usuario.DireccionCorreo,
+                bloqueado = usuario.Bloqueado
+            };
+            
+            
+            return View(usuarioMV);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarUsuario(int id, Usuario model)
+        public ActionResult EditarUsuario(int id, UsuarioEditarVM model)
         {
             if (id != model.idUsuario)
             {
@@ -102,8 +134,18 @@ namespace WebApplication1.Controllers
 
             try
             {
-                _repoUsuarios.editarUsuario(model);
-                return RedirectToAction(nameof(DetallesUsuario), new { id = model.idUsuario });
+                var usuaarioEntity = new UsuarioEntity
+                {
+                    IdUsuario = model.idUsuario,
+                    Apellidos = model.apellidos,
+                    Nombres = model.nombres,
+                    Cuil = model.cuil,
+                    DireccionCorreo = model.direccionCorreo,
+                    Bloqueado = model.bloqueado
+                };
+
+                _repoUsuarios.editarUsuario(usuaarioEntity);
+                return RedirectToAction(nameof(ListarUsuarios));
             }
             catch
             {
@@ -131,6 +173,6 @@ namespace WebApplication1.Controllers
                 return View();
             }
         }
-        */
+        
     }
 }
