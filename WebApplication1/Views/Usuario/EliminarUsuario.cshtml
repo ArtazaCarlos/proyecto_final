@@ -1,7 +1,7 @@
 ﻿@model WebApplication1.ViewModels.UsuarioListarVM
 
 @{
-    ViewData["Title"] = "EliminiarUsuario";
+    ViewData["Title"] = "EliminarUsuario";
 }
 
 <h1>EliminiarUsuario</h1>
@@ -57,9 +57,9 @@
         </dd>
     </dl>
     
-    <form asp-action="EliminiarUsuario" method="post">
+    <form asp-action="EliminarUsuario" method="post">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="ListarUsuarios" asp-controller="Usuario">Volver</a>
         <input type="hidden" asp-for="idUsuario" />
     </form>
 </div>

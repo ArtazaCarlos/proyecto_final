@@ -142,7 +142,7 @@ namespace WebApplication1.Repositories
             const string consultaString = @"INSERT INTO usuario 
                                        (apellidos, nombres, cuil, direccion_correo, nombre_usuario, contrasena, bloqueado, fecha_hora_ult_conectado, activo) 
                                        VALUES 
-                                       (@apellidos, @nombres, @cuil, @direccionCorreo, @apellidos || (SELECT MAX(id_usuario) FROM usuario), @contrasena, false, @fechaHoraUltConectado, true);";
+                                       (@apellidos, @nombres, @cuil, @direccionCorreo, @apellidos || (SELECT COALESCE(MAX(id_usuario)+1, 1) FROM usuario), @contrasena, false, @fechaHoraUltConectado, true);";
             using var comando = new NpgsqlCommand(consultaString, conexion);
             comando.Parameters.AddWithValue("@apellidos", usuarioEntity.Apellidos);
             comando.Parameters.AddWithValue("@nombres", usuarioEntity.Nombres);

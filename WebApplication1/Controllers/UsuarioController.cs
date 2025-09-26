@@ -154,7 +154,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: UsuarioController/Delete/5
-        public ActionResult EliminiarUsuario(int id)
+        public ActionResult EliminarUsuario(int id)
         {
             var usuario = _repoUsuarios.obtenerUsuarioPorId(id);
             if (usuario == null)
@@ -179,7 +179,7 @@ namespace WebApplication1.Controllers
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EliminiarUsuario(int id, UsuarioListarVM usuarioVM)
+        public ActionResult EliminarUsuario(int id, UsuarioListarVM usuarioVM)
         {
             if (id != usuarioVM.idUsuario)
             {
