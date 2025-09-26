@@ -4,8 +4,9 @@
     {
         private int idPermiso;
         private string permiso;
-        public int IdPermiso { get => idPermiso; }
-        public string PermisoNombre { get => permiso; }
+
+        public int IdPermiso { get => idPermiso; set { idPermiso = IdPermiso; } }
+        public string PermisoNombre { get => permiso; set { permiso = PermisoNombre; } }
 
     }
 }

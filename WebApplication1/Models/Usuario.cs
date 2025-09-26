@@ -1,4 +1,7 @@
-﻿namespace WebApplication1.Models
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace WebApplication1.Models
 {
     public class Usuario
     {
@@ -39,7 +42,7 @@
             this.cuil = cuil;
             this.cargo = cargo;
             this.nombreUsuario = nombreUsuario;
-            this.contrasena = contrasena;
+            this.contrasena = HashearPassword(contrasena);
             this.bloqueado = bloqueado;
             this.pinTemporal = pinTemporal;
             this.ultimoAcceso = ultimoAcceso;
@@ -47,5 +50,14 @@
 
         public Usuario() { }
 
+        private static string HashearPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hash = sha256.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
+            }
+        }
     }
 }
