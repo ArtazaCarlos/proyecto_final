@@ -2,20 +2,21 @@
 {
     public class Usuario
     {
-        private int idUsuario;
-        private string apellidos;
-        private string nombres;
-        private string direccionCorreo;
-        private string cuil;
-        private Cargo cargo;
-        private string nombreUsuario;
-        private string contrasena;
-        private bool bloqueado;
-        private int? pinTemporal;
-        private DateTime ultimoAcceso;
+        public int idUsuario { get; set; }
+        public string apellidos { get; set; }
+        public string nombres { get; set; }
+        public string direccionCorreo { get; set; }
+        public string cuil { get; set; }
+        public Cargo cargo { get; set; }
+        public string nombreUsuario { get; set; }
+        public string contrasena { get; set; }
+        public bool bloqueado { get; set; }
+        public int? pinTemporal { get; set; }
+        public DateTime ultimoAcceso { get; set; }
         //private List<Permiso> permisos;
 
-        public int IdUsuario { get => idUsuario; }
+        /*
+        public int IdUsuario { get => idUsuario; set; }
         public string Apellidos { get => apellidos; }
         public string Nombres { get => nombres; }
         public string DireccionCorreo { get => direccionCorreo; }
@@ -27,6 +28,7 @@
         public int? PinTemporal { get => pinTemporal; }
         public DateTime UltimoAcceso { get => ultimoAcceso; }
         //public List<Permiso> Permisos { get => permisos; }
+        */
 
         public Usuario(int idUsuario, string apellidos, string nombres, string cuil, Cargo cargo, string direccionCorreo, string nombreUsuario, string contrasena, bool bloqueado, int pinTemporal, DateTime ultimoAcceso)
         {
