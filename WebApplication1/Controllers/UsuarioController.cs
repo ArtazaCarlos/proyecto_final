@@ -154,19 +154,42 @@ namespace WebApplication1.Controllers
         }
 
         // GET: UsuarioController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult EliminiarUsuario(int id)
         {
-            return View();
+            var usuario = _repoUsuarios.obtenerUsuarioPorId(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            var usuarioMV = new UsuarioListarVM
+            {
+                idUsuario = usuario.IdUsuario,
+                apellidos = usuario.Apellidos,
+                nombres = usuario.Nombres,
+                direccionCorreo = usuario.DireccionCorreo,
+                cuil = usuario.Cuil,
+                cargo = usuario.Cargo,
+                nombreUsuario = usuario.NombreUsuario,
+                bloqueado = usuario.Bloqueado,
+                ultimoAcceso = usuario.FechaHoraUltConectado
+            };
+            return View(usuarioMV);
         }
 
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult EliminiarUsuario(int id, UsuarioListarVM usuarioVM)
         {
+            if (id != usuarioVM.idUsuario)
+            {
+                return BadRequest();
+            }
+            
             try
             {
-                return RedirectToAction(nameof(Index));
+                _repoUsuarios.eliminarUsuario(id);
+                return RedirectToAction(nameof(ListarUsuarios));
             }
             catch
             {

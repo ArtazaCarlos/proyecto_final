@@ -154,6 +154,18 @@ namespace WebApplication1.Repositories
             comando.ExecuteNonQuery();
         }
 
+        public void eliminarUsuario(int idUsuario)
+        {
+            using var conexion = new NpgsqlConnection(_cadenaDeConexion);
+            conexion.Open();
+            const string consultaString = @"UPDATE usuario 
+                                       SET activo = false 
+                                       WHERE id_usuario = @idUsuario;";
+            using var comando = new NpgsqlCommand(consultaString, conexion);
+            comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+            comando.ExecuteNonQuery();
+        }
+
         private string HashPassword(string password)
         {
             using var sha256 = SHA256.Create();

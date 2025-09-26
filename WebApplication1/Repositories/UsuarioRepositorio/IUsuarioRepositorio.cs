@@ -10,5 +10,6 @@ namespace WebApplication1.Repositories
         Usuario obtenerUsuarioPorId(int idUsuario);
         void editarUsuario(UsuarioEntity usuario);
         void crearUsuario(UsuarioEntity usuario);
+        void eliminarUsuario(int idUsuario);
     }
 }
