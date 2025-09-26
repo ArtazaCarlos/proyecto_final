@@ -1,63 +1,52 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
+
 namespace WebApplication1.Models
 {
     public class Usuario
     {
-        public int idUsuario { get; set; }
-        public string apellidos { get; set; }
-        public string nombres { get; set; }
-        public string direccionCorreo { get; set; }
-        public string cuil { get; set; }
-        public Cargo cargo { get; set; }
-        public string nombreUsuario { get; set; }
-        public string contrasena { get; set; }
-        public bool bloqueado { get; set; }
-        public int? pinTemporal { get; set; }
-        public DateTime ultimoAcceso { get; set; }
-        //private List<Permiso> permisos;
+        public int IdUsuario { get; set; }
+        public string Apellidos { get; set; }
+        public string Nombres { get; set; }
+        public string Sexo { get; set; }
+        public string Dni { get; set; }
+        public Cargo Cargo { get; set; }
+        public string Cuil { get; set; }
+        public string Domicilio { get; set; }
+        public string Telefono { get; set; }
+        public string DireccionCorreo { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Contrasena { get; set; }
+        public bool Bloqueado { get; set; }
+        public DateTime FechaHoraUltConectado { get; set; }
+        public short? PinTemporal { get; set; }
+        public bool Activo { get; set; }
+        public List<Permiso> Permisos { get; set; } = new List<Permiso>();
 
-        /*
-        public int IdUsuario { get => idUsuario; set; }
-        public string Apellidos { get => apellidos; }
-        public string Nombres { get => nombres; }
-        public string DireccionCorreo { get => direccionCorreo; }
-        public string NombreUsuario { get => nombreUsuario; }
-        public string Contrasena { get => contrasena; }
-        public string Cuil { get => cuil; }
-        public Cargo Cargo { get => cargo; set => cargo = value; }
-        public bool Bloqueado { get => bloqueado; }
-        public int? PinTemporal { get => pinTemporal; }
-        public DateTime UltimoAcceso { get => ultimoAcceso; }
-        //public List<Permiso> Permisos { get => permisos; }
-        */
 
-        public Usuario(int idUsuario, string apellidos, string nombres, string cuil, Cargo cargo, string direccionCorreo, string nombreUsuario, string contrasena, bool bloqueado, int pinTemporal, DateTime ultimoAcceso)
+        public Usuario()
         {
-            this.idUsuario = idUsuario;
-            this.apellidos = apellidos;
-            this.nombres = nombres;
-            this.direccionCorreo = direccionCorreo;
-            this.cuil = cuil;
-            this.cargo = cargo;
-            this.nombreUsuario = nombreUsuario;
-            this.contrasena = HashearPassword(contrasena);
-            this.bloqueado = bloqueado;
-            this.pinTemporal = pinTemporal;
-            this.ultimoAcceso = ultimoAcceso;
         }
 
-        public Usuario() { }
-
-        private static string HashearPassword(string password)
+        public Usuario(int idUsuario, string apellidos, string nombres, string sexo, string dni, Cargo cargo, string cuil, string domicilio, string telefono, string direccionCorreo, string nombreUsuario, string contrasena)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = sha256.ComputeHash(bytes);
-                return Convert.ToBase64String(hash);
-            }
+            IdUsuario = idUsuario;
+            Apellidos = apellidos;
+            Nombres = nombres;
+            Sexo = sexo;
+            Dni = dni;
+            Cargo = cargo;
+            Cuil = cuil;
+            Domicilio = domicilio;
+            Telefono = telefono;
+            DireccionCorreo = direccionCorreo;
+            NombreUsuario = nombreUsuario;
+            Contrasena = contrasena;
+            Bloqueado = false;
+            FechaHoraUltConectado = DateTime.Now;
+            PinTemporal = null;
+            Activo = true;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.Collections.Generic;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
 using WebApplication1.ViewModels;
@@ -18,10 +20,29 @@ namespace WebApplication1.Controllers
         [Route("/usuarios")]
         public IActionResult ListarUsuarios()
         {
+            var usuariosVM = new List<UsuarioListarVM>(); 
             var usuarios = _repoUsuarios.obtenerUsuarios();
-            return View(new MostrarUsuariosVM(usuarios));
+
+            foreach (var u in usuarios)
+            {
+                var usuarioMV = new UsuarioListarVM
+                {
+                    idUsuario = u.IdUsuario,
+                    apellidos = u.Apellidos,
+                    nombres = u.Nombres,
+                    direccionCorreo = u.DireccionCorreo,
+                    cuil = u.Cuil,
+                    cargo = u.Cargo,
+                    nombreUsuario = u.NombreUsuario,
+                    bloqueado = u.Bloqueado,
+                    ultimoAcceso = u.FechaHoraUltConectado
+                };
+                usuariosVM.Add(usuarioMV);
+            }
+            return View(usuariosVM);
         }
 
+        /*
         // GET: UsuarioController/Details/5
         public ActionResult DetallesUsuario(int id)
         {
@@ -110,5 +131,6 @@ namespace WebApplication1.Controllers
                 return View();
             }
         }
+        */
     }
 }

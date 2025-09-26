@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System.Net;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Repositories
 {
@@ -10,58 +11,55 @@ namespace WebApplication1.Repositories
 
         public UsuarioRepositorio(string cadenaDeConexion) => _cadenaDeConexion = cadenaDeConexion;
 
-        public List<Usuario> obtenerUsuarios() 
+
+
+        public IEnumerable<Usuario> obtenerUsuarios() 
         { 
             var usuarios = new List<Usuario>();
-            NpgsqlConnection conexion = new NpgsqlConnection(_cadenaDeConexion);
+            using var conexion = new NpgsqlConnection(_cadenaDeConexion);
             conexion.Open();
-
-            string consultaString = @"SELECT id_usuario, apellidos, nombres, 
-                                    cargo.id_cargo, cargo.cargo, cuil, direccion_correo, nombre_usuario, contrasena, bloqueado, 
-                                    fecha_hora_ult_conectado, pin_temporal
-	                                FROM usuario 
+            const string consultaString = @"SELECT id_usuario, apellidos, nombres, cargo.id_cargo, cargo.cargo, 
+                                    cuil, direccion_correo, nombre_usuario, bloqueado, 
+                                    fecha_hora_ult_conectado
+                                    FROM usuario 
                                     INNER JOIN cargo USING(id_cargo)
-                                    WHERE activo = true;";
-
-            NpgsqlCommand comando = new NpgsqlCommand(consultaString, conexion);
-
-            using (var reader = comando.ExecuteReader())
+                                    WHERE activo = true
+                                    ORDER BY apellidos, nombres;";
+            using var comando = new NpgsqlCommand(consultaString, conexion);
+            using var reader = comando.ExecuteReader();
+            while (reader.Read())
             {
-                int idUsuario = 0;
-                string apellidos = string.Empty;
-                string nombres = string.Empty;
-                string cuil = string.Empty;
-                Cargo cargo = null;
-                string direccionCorreo = string.Empty;
-                string nombreUsuario = string.Empty;
-                string contrasena = string.Empty;
-                bool bloqueado;
-                int pinTemporal;
-                DateTime ultimoAcceso;
+                int idUsr = Convert.ToInt32(reader["id_usuario"]);
+                string apellidos = reader["apellidos"].ToString();
+                string nombres = reader["nombres"].ToString();
+                Cargo cargo = new Cargo(Convert.ToInt32(reader["id_cargo"]), reader["cargo"].ToString());
+                string cuil = reader["cuil"].ToString();
+                string direccionCorreo = reader["direccion_correo"].ToString();
+                string nombreUsuario = reader["nombre_usuario"].ToString();
+                bool bloqueado = Convert.ToBoolean(reader["bloqueado"]);
+                DateTime ultimoAcceso = Convert.ToDateTime(reader["fecha_hora_ult_conectado"]);
 
-                while (reader.Read())
+                var usuario = new Usuario
                 {
-                    idUsuario = Convert.ToInt32(reader["id_usuario"]);
-                    apellidos = reader["apellidos"].ToString();
-                    nombres = reader["nombres"].ToString();
-                    cuil = reader["cuil"].ToString();
-                    cargo = new Cargo(Convert.ToInt32(reader["id_cargo"]), reader["cargo"].ToString());
-                    direccionCorreo = reader["direccion_correo"].ToString();
-                    nombreUsuario = reader["nombre_usuario"].ToString();
-                    contrasena = reader["contrasena"].ToString();
-                    bloqueado = Convert.ToBoolean(reader["bloqueado"]);
-                    pinTemporal = reader["pin_temporal"] == DBNull.Value ? 0 : Convert.ToInt32(reader["pin_temporal"]);
-                    ultimoAcceso = Convert.ToDateTime(reader["fecha_hora_ult_conectado"]);
+                    IdUsuario = idUsr,
+                    Apellidos = apellidos,
+                    Nombres = nombres,
+                    Cargo = cargo,
+                    Cuil = cuil,
+                    DireccionCorreo = direccionCorreo,
+                    NombreUsuario = nombreUsuario,
+                    Bloqueado = bloqueado,
+                    FechaHoraUltConectado = ultimoAcceso
+                };
 
-                    Usuario usuario = new Usuario(idUsuario, apellidos, nombres, cuil, cargo, direccionCorreo, nombreUsuario, contrasena, bloqueado, pinTemporal, ultimoAcceso);
-
-                    usuarios.Add(usuario);
-                }
+                usuarios.Add(usuario);
             }
-            conexion.Close();
             return usuarios;
         }
 
+
+
+        /*
         public Usuario obtenerUsuarioPorId(int idUsuario)
         {
             Usuario usuario = null;
@@ -129,6 +127,7 @@ namespace WebApplication1.Repositories
             comando.ExecuteNonQuery();
 
         }
+        */
     }
 }
 

@@ -1,12 +1,12 @@
-﻿using WebApplication1.Models;
+﻿using WebApplication1.ViewModels;
 
 namespace WebApplication1.ViewModels
 {
     public class MostrarUsuariosVM
     {
-        public List<Usuario> usuarios { get; }
+        public List<UsuarioListarVM> usuarios { get; }
 
-        public MostrarUsuariosVM(List<Usuario> usuarios)
+        public MostrarUsuariosVM(List<UsuarioListarVM> usuarios)
         {
             this.usuarios = usuarios;
         }

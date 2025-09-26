@@ -1,4 +1,4 @@
-﻿@model WebApplication1.ViewModels.MostrarUsuariosVM;
+﻿@model IEnumerable<WebApplication1.ViewModels.UsuarioListarVM>;
 
 @{
     ViewData["Title"] = "Usuarios";
@@ -7,7 +7,7 @@
 <h1 class="titulo-vista">Usuarios</h1>
 <a href="#" class="btn btn-success">+ Nuevo usuario</a>
 <section id="lista">
-    @foreach(var usuario in Model.usuarios)
+    @foreach(var usuario in Model)
     {
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#infoUsuario">
             <article>
