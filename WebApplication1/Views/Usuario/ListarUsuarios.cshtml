@@ -5,12 +5,13 @@
 }
 
 <h1 class="titulo-vista">Usuarios</h1>
+<a href="#" class="btn btn-success">+ Nuevo usuario</a>
 <section id="lista">
     @foreach(var usuario in Model.usuarios)
     {
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#infoUsuario">
             <article>
-                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.NombreUsuario}")"/>
+                <img src="@($"https://avatar.iran.liara.run/username?username={usuario.Apellidos}+{usuario.Nombres}")"/>
                 <h2>
                     @usuario.NombreUsuario
                 </h2>
